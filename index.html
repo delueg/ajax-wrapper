@@ -1,0 +1,69 @@
+<!doctype>
+<html>
+<head>
+<title>Ajax-Wrapper</title>
+<!--/**
+ * Sven Delueg
+ * delueg.org
+ * svendelueg@gmail.com
+ */-->
+</head>
+<body>
+<input type="button" value="Click me!" id="clickme"/>
+<!--Be careful, this wrapper is build for jQuery 1.9.1 - maybe it doesn´ work with versions before 1.9-->
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="./js/ajax_wrapper.js"></script>
+<script>
+
+	//initialise the wrapper
+	var ajax_wrapper = new ajax_wrapper_();
+
+	//setup
+	var data_object_to_call = {
+		"url"	:	"http://dlyx.de/ajax-wrapper/call.php",//the url where the post or get request should be send
+		"data"	:	{"value1":"Here some Value","value2":"here some more values and so on.."}
+	};
+
+	//options
+	var options_for_call = {
+		"async"		: 	true,
+		"type"		: 	"POST",
+		"datatype"	: 	"JSON",
+		"cache"		:	true
+	};
+
+	//handle the response
+	var responseFunctionObject = {
+		"doneFunc"	:	function(response){
+			//handle the success response
+			var data = jQuery.parseJSON(response);
+			alert(data.first_value+"\n"+data.second_value+"\n"+data.third_value);
+		},
+		"failFunc"		:	function(jqXHR, textStatus, errorThrown){
+			//handle the error response
+			if(console && console.log){
+				console.log(jqXHR, textStatus, errorThrown);
+			}
+
+		},
+		"alwaysFunc"	:	function(datajqXHR, textStatus, jqXHRerrorThrown){
+			//this function will be executes every time you use the wrapper
+			if(console && console.log){
+				console.log("AjaxWrapper-Call");
+			}
+		}
+
+	};
+
+	// init is to test if it´s working - should console.log("It's working!")
+	//ajax_wrapper.init();
+
+	//usage for example on a click event or whatever
+	$("#clickme").click(function(){
+		ajax_wrapper.call(data_object_to_call,options_for_call,responseFunctionObject);
+	});
+
+
+</script>
+</body>
+</html>
