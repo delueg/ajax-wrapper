@@ -31,7 +31,7 @@ ajax_wrapper_.prototype = {
 				"type"		: 	options.type 		? options.type 		: 'POST',
 				"datatype"	: 	options.datatype 	? options.datatype 	: 'JSON',
 				"cache"		:   options.cache 		? options.cache 	: true,
-				"data"		: 	{"sendData":JSON.stringify(callObj.data)}
+				"data"		: 	{"ajaxwrapper":JSON.stringify(callObj.data)}
 			})
 				/*Response Functions*/
 				.done(

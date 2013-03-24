@@ -1,10 +1,10 @@
 <?php
 
-if(isset($_POST['sendData'])){
+if(isset($_POST['ajaxwrapper'])){
 	//create an object to return
 	$echo_data 					= new stdClass();
 	//decode the sendData
-	$data 						= json_decode($_POST['sendData']);
+	$data 						= json_decode($_POST['ajaxwrapper']);
 	//give it back to the frontend
 	$echo_data->first_value 	= $data->value1;
 	$echo_data->second_value 	= $data->value2;
@@ -12,6 +12,5 @@ if(isset($_POST['sendData'])){
 	//return the data
 	echo json_encode($echo_data);
 }
- 
 
 ?>
